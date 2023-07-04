@@ -4,15 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node dist"
+    "start": "tsc && node dist",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "pluralize": "^8.0.0",
     "puppeteer": "^20.4.0"
   },
   "devDependencies": {
+    "@types/pluralize": "^0.0.29",
     "typescript": "^5.1.3"
   }
 }

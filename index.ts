@@ -1,4 +1,4 @@
-import puppeteer from "puppeteer";
+import puppeteer, { Page } from "puppeteer";
 import { EBird } from "./ebird";
 
 async function delay(time: number) {
@@ -40,10 +40,17 @@ async function main() {
     const title = await EBird.getMyListTitle(page);
     console.log(title);
     await delay(1000);
+
+    const speciesList = await EBird.getMySpeciesNames(page);
+    console.log(speciesList);
+    await delay(1000);
+
     const location = await EBird.getMyListLatLong(page);
     if (location) {
       const [lat, long] = location;
       console.log("lat is", lat);
+      // const species: string[] = [];
+
       const species: string[] = [];
       console.log("long is", long);
 

@@ -1,4 +1,7 @@
 import { Page } from "puppeteer";
+import pluralize from "pluralize";
+
+pluralize.addPluralRule(/goose$/i, "Geese");
 
 const E_BIRD_LANDING = "https://ebird.org/home";
 
@@ -71,6 +74,34 @@ export class EBird {
     // await page.waitForSelector(title);
     return value?.replace(/\t/g, "");
   }
+
+  static async getMySpeciesNames(page: Page) {
+    const speciesSelector = "#list > section > ol > li > section > div > h3";
+    let species = await page.$$eval(speciesSelector, (names) =>
+      names.map((name) => name.innerText)
+    );
+    const numberObserved =
+      "section > div.Observation-numberObserved > span > span:nth-child(2)";
+    let numberList = await page.$$eval(numberObserved, (numbers) =>
+      numbers.map((number) => number.innerText)
+    );
+    return numberList.map(
+      (number, index) =>
+        number + " " + pluralize(species[index], parseInt(number))
+    );
+  }
+
+  /* 
+  
+[
+   ' 12 Canada Goose',
+  ' 3 Mallard',
+  'Double-crested Cormorant',
+  'white egret sp.',
+  'Green Heron',
+]
+  
+  */
 
   static async getMyListLatLong(page: Page) {
     const locationSelector = 'a[title="View with Google Maps"]';
