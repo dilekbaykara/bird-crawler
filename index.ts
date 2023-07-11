@@ -1,5 +1,6 @@
 import puppeteer, { Page } from "puppeteer";
 import { EBird } from "./ebird";
+import fs from "fs";
 
 async function delay(time: number) {
   await new Promise((resolve) => setTimeout(resolve, time));
@@ -49,9 +50,8 @@ async function main() {
     if (location) {
       const [lat, long] = location;
       console.log("lat is", lat);
-      // const species: string[] = [];
 
-      const species: string[] = [];
+      const species: string[] = speciesList;
       console.log("long is", long);
 
       const newMapPin: MapPin = {
@@ -64,7 +64,45 @@ async function main() {
 
     await delay(1000);
   }
+
   console.log(mapPins);
+
+  let html = `
+  <html>
+  <head> 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+    <style>
+      body {margin: 0;}
+      #map { height: 100%; } 
+    </style>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+    
+  </head>
+  <body>
+
+    <div id="map"></div>
+    <script>
+    const map = L.map('map').setView([40.7536729, -73.9832322], 13);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    const mapPins = ${JSON.stringify(mapPins)};
+    const lat = mapPins[0].lat;
+    const long = mapPins[0].long;
+    const marker = L.marker([lat, long]).addTo(map);
+    </script>
+    
+  </body>
+  </html>
+  `;
+  fs.writeFileSync("My eBird Map" + ".html", html);
   await browser.close();
 }
 
