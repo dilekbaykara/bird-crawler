@@ -73,10 +73,31 @@ async function main() {
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
-
+    <link rel="stylesheet" href="https://use.typekit.net/lhb4sbg.css" />
     <style>
-      body {margin: 0;}
-      #map { height: 100%; } 
+      body {
+        margin: 0;
+        background-color: #f8f8f8;
+      }
+      #map {
+        margin-bottom: 2rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+        height: 90%;
+        border-radius: 15px;
+        filter: drop-shadow(6px 6px 5px grey);
+      }
+      #title {
+        display: flex;
+        font-family: "program", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        font-size: 39px;
+        align-items: center;
+        justify-content: center;
+        margin: 1rem;
+        color: #0070b3;
+      }
     </style>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -85,18 +106,27 @@ async function main() {
     
   </head>
   <body>
-
+    <div id="title">My eBird Map</div>
     <div id="map"></div>
     <script>
-    const map = L.map('map').setView([40.7536729, -73.9832322], 13);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-    const mapPins = ${JSON.stringify(mapPins)};
-    const lat = mapPins[0].lat;
-    const long = mapPins[0].long;
-    const marker = L.marker([lat, long]).addTo(map);
+      const map = L.map('map').setView([39.952583, -75.165222], 7.5);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+      const mapPins = ${JSON.stringify(mapPins)};
+      const markers = [];
+      for (const mapPin of mapPins) {
+        const lat = mapPin.lat;
+        const long = mapPin.long;
+        const marker = L.marker([lat, long]).addTo(map);
+        markers.push(marker);
+        const species = mapPin.species;
+        marker.bindPopup("<b>Species observed</b><br>" + species.join("<br>"));
+      }
+      const markerGroup = new L.featureGroup(markers);
+      map.fitBounds(markerGroup.getBounds());
+    
     </script>
     
   </body>
