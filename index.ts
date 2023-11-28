@@ -1,6 +1,10 @@
 import puppeteer, { Page } from "puppeteer";
 import { EBird } from "./ebird";
 import fs from "fs";
+import * as readline from "node:readline/promises";
+import { stdin as input, stdout as output } from "node:process";
+
+const rl = readline.createInterface({ input, output });
 
 async function delay(time: number) {
   await new Promise((resolve) => setTimeout(resolve, time));
@@ -14,7 +18,17 @@ interface MapPin {
 
 async function main() {
   console.log(process.argv[2]);
+  const E_BIRD_USERNAME = await rl.question("What is your username? ");
+  const E_BIRD_PASSWORD = await rl.question("What is your password? ");
+  rl.close();
 
+  if (typeof E_BIRD_USERNAME != "string") {
+    throw new Error("Username is required");
+  }
+
+  if (typeof E_BIRD_PASSWORD != "string") {
+    throw new Error("E_BIRD_PASSWORD is required");
+  }
   // get the browser and page object (puppeteer stuff)
   // -- browser is only used to get the page
   // -- page is used to interact with the page, select elements, etc.
@@ -23,7 +37,7 @@ async function main() {
 
   await EBird.goToEBirdHomePage(page);
   await delay(1000);
-  await EBird.logInToEBird(page);
+  await EBird.logInToEBird(page, E_BIRD_USERNAME, E_BIRD_PASSWORD);
   await delay(1000);
   await EBird.goToMyEBirdPage(page);
   await delay(1000);

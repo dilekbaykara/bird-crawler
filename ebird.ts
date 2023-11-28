@@ -1,12 +1,11 @@
 import { Page } from "puppeteer";
 import pluralize from "pluralize";
 
+
 pluralize.addPluralRule(/goose$/i, "Geese");
 
 const E_BIRD_LANDING = "https://ebird.org/home";
 
-const E_BIRD_USERNAME = "drewtcraft";
-const E_BIRD_PASSWORD = "MyD0GisCOOL!";
 
 async function delay(time: number) {
   await new Promise((resolve) => setTimeout(resolve, time));
@@ -25,7 +24,8 @@ export class EBird {
 
   // class that is basically just a namespace for static methods
   // relating to eBird login
-  static async logInToEBird(page: Page) {
+  static async logInToEBird(page: Page, E_BIRD_USERNAME : string, E_BIRD_PASSWORD : string) {
+   
     // the HTML selector that gets the sign up button
     const signUpSelector = ".HeaderEbird-menu-tools ul li:nth-child(2)";
     await page.waitForSelector(signUpSelector);
@@ -90,18 +90,6 @@ export class EBird {
         number + " " + pluralize(species[index], parseInt(number))
     );
   }
-
-  /* 
-  
-[
-   ' 12 Canada Goose',
-  ' 3 Mallard',
-  'Double-crested Cormorant',
-  'white egret sp.',
-  'Green Heron',
-]
-  
-  */
 
   static async getMyListLatLong(page: Page) {
     const locationSelector = 'a[title="View with Google Maps"]';

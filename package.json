@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/node": "^20.10.0",
     "pluralize": "^8.0.0",
     "puppeteer": "^20.4.0"
   },
