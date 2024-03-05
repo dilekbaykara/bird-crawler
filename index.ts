@@ -92,12 +92,15 @@ async function main() {
       body {
         margin: 0;
         background-color: #f8f8f8;
+        display: flex;
+        height: 100%;
+        flex-direction: column;
       }
       #map {
+        flex-grow: 1;
         margin-bottom: 2rem;
         margin-left: 2rem;
         margin-right: 2rem;
-        height: 90%;
         border-radius: 15px;
         filter: drop-shadow(6px 6px 5px grey);
       }
@@ -113,7 +116,6 @@ async function main() {
         color: #0070b3;
       }
     </style>
-
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
