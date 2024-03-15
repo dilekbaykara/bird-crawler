@@ -17,3 +17,8 @@ Obtain Node.js and npm from [nodejs.org](https://nodejs.org/en/download)
 ![carbon (1)](https://github.com/dilekbaykara/bird-crawler/assets/73802910/7c30a7e9-135b-4000-925a-04d782a7bbd3)
 7. To open the display map enter the following command: `open "My eBird Map.html"` NB! please include quotation marks
 <img width="1178" alt="Screenshot 2024-03-04 at 7 21 54 PM" src="https://github.com/dilekbaykara/bird-crawler/assets/73802910/11976a06-e419-4f54-9401-bb260fb7634e">
+
+## Developer Guide
+
+To submit a pull request, [fork the repo](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) and [create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/proposing-changes-to-your-work-with-pull-requests) 
+
