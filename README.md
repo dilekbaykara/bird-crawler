@@ -32,6 +32,12 @@ To submit a pull request, [fork the repo](https://help.github.com/en/github/gett
 
 [Pluralize](https://www.npmjs.com/package/pluralize) - Pluralizes words used in output file
 
+### Code Layout
+
+`index.ts` - Main script. Reads username and password input from command line, crawls the eBird website and generates final map pins in .html file
+
+`ebird.ts` - Class `EBird` contains methods that retrieves data from eBird pages (log in, My eBird dashboard, checklists, list title, species names, location coordinates)
+
 
 
 
