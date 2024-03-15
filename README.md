@@ -38,7 +38,9 @@ To submit a pull request, [fork the repo](https://help.github.com/en/github/gett
 
 `ebird.ts` - Class `EBird` contains methods that retrieves data from eBird pages (log in, My eBird dashboard, checklists, list title, species names, location coordinates)
 
+### License
 
+All contributions will be licensed through the [ISC](https://opensource.org/license/isc-license-txt) license.
 
 
 
