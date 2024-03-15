@@ -22,3 +22,18 @@ Obtain Node.js and npm from [nodejs.org](https://nodejs.org/en/download)
 
 To submit a pull request, [fork the repo](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) and [create a pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/proposing-changes-to-your-work-with-pull-requests) 
 
+### Dependencies
+
+[TypeScript](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html) - JavaScript with types
+
+[Puppeteer](https://pptr.dev/) - Browser automation tool to crawl through the eBird website
+
+[Leaflet](https://leafletjs.com/reference.html) - JavaScript mapping library used in the final .html file
+
+[Pluralize](https://www.npmjs.com/package/pluralize) - Pluralizes words used in output file
+
+
+
+
+
+
